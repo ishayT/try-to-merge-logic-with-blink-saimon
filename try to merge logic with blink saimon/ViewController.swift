@@ -10,6 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    //1. all of the saimon playing buttons
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var startButton: UIButton!
+    
+    //2. the score lives related varibals
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var livesLabel: UILabel!
+    
+    var scoreNumber : Int = 0
+    var numberOfLives = 3
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
