@@ -12,6 +12,10 @@
 		D70FCB7220614BCA00F4C744 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB7020614BCA00F4C744 /* Main.storyboard */; };
 		D70FCB7420614BCA00F4C744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB7320614BCA00F4C744 /* Assets.xcassets */; };
 		D70FCB7720614BCA00F4C744 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB7520614BCA00F4C744 /* LaunchScreen.storyboard */; };
+		D70FCB822061977A00F4C744 /* buttonSound1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB7E2061977900F4C744 /* buttonSound1.wav */; };
+		D70FCB832061977A00F4C744 /* buttonSound4.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB7F2061977A00F4C744 /* buttonSound4.wav */; };
+		D70FCB842061977A00F4C744 /* buttonSound3.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB802061977A00F4C744 /* buttonSound3.wav */; };
+		D70FCB852061977A00F4C744 /* buttonSound2.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70FCB812061977A00F4C744 /* buttonSound2.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		D70FCB7320614BCA00F4C744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D70FCB7620614BCA00F4C744 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D70FCB7820614BCA00F4C744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D70FCB7E2061977900F4C744 /* buttonSound1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound1.wav; sourceTree = "<group>"; };
+		D70FCB7F2061977A00F4C744 /* buttonSound4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound4.wav; sourceTree = "<group>"; };
+		D70FCB802061977A00F4C744 /* buttonSound3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound3.wav; sourceTree = "<group>"; };
+		D70FCB812061977A00F4C744 /* buttonSound2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound2.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,10 @@
 				D70FCB7320614BCA00F4C744 /* Assets.xcassets */,
 				D70FCB7520614BCA00F4C744 /* LaunchScreen.storyboard */,
 				D70FCB7820614BCA00F4C744 /* Info.plist */,
+				D70FCB7E2061977900F4C744 /* buttonSound1.wav */,
+				D70FCB812061977A00F4C744 /* buttonSound2.wav */,
+				D70FCB802061977A00F4C744 /* buttonSound3.wav */,
+				D70FCB7F2061977A00F4C744 /* buttonSound4.wav */,
 			);
 			path = "try to merge logic with blink saimon";
 			sourceTree = "<group>";
@@ -124,7 +136,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70FCB7720614BCA00F4C744 /* LaunchScreen.storyboard in Resources */,
+				D70FCB822061977A00F4C744 /* buttonSound1.wav in Resources */,
 				D70FCB7420614BCA00F4C744 /* Assets.xcassets in Resources */,
+				D70FCB842061977A00F4C744 /* buttonSound3.wav in Resources */,
+				D70FCB852061977A00F4C744 /* buttonSound2.wav in Resources */,
+				D70FCB832061977A00F4C744 /* buttonSound4.wav in Resources */,
 				D70FCB7220614BCA00F4C744 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
