@@ -92,6 +92,7 @@ class ViewController: UIViewController {
 
     //MARK:- 9.start a new round of buttons played by the computer
     func startNewRound() {
+        changeThePlayButtons(isEnabledStatus: false, arrayOfButtons: arrayOfButtons)
         
         arrayOfBtnNumbersPlayedByThePlayer.removeAll()
         gameTimer = Timer.scheduledTimer(timeInterval: 1.3, target: self, selector: #selector(usingButtonsArray), userInfo: nil, repeats: true)
@@ -117,7 +118,6 @@ class ViewController: UIViewController {
         }
         
         if counterForTheComputerTurn < arrayOfBtnNumbersPlayedByTheComp.count - 1 {
-            
             buttons[arrayOfBtnNumbersPlayedByTheComp[counterForTheComputerTurn] - 1].flash()
             playSound()
             counterForTheComputerTurn += 1
@@ -125,6 +125,45 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func gameButtonsPressedByTheUser(_ sender: UIButton) {
+        selectedSound = arrayOfSounds[sender.tag - 1]
+        arrayOfBtnNumbersPlayedByThePlayer.append(sender.tag)
+        
+        // adding glow and sound for the buttons
+        for i in 1...4 {
+            if i == sender.tag {
+                sender.flash()
+                playSound()
+            }
+        }
+        
+        for index in 0...arrayOfBtnNumbersPlayedByThePlayer.count-1{
+            
+            if arrayOfBtnNumbersPlayedByThePlayer[index] == arrayOfBtnNumbersPlayedByTheComp[index] {
+                print("you are right")
+                scoreNumber = scoreNumber + 5 + 2 * numberOfRounds
+                updateUI()
+                print(scoreNumber)
+            } else {
+                print("you are wrong")
+                numberOfLives -= 1
+                scoreNumber = scoreNumber - 5
+                updateUI()
+                print(scoreNumber)
+                if numberOfLives == 0 {
+                    //gameOver()
+                }
+                break
+            }
+        }
+        
+        if arrayOfBtnNumbersPlayedByThePlayer.count == arrayOfBtnNumbersPlayedByTheComp.count {
+            randomNumber = Int(arc4random_uniform(4)+1)
+            arrayOfBtnNumbersPlayedByTheComp.append(self.randomNumber)
+            startNewRound()
+        }
+    }
     
     
     
