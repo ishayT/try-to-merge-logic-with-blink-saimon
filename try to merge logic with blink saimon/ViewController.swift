@@ -24,7 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var livesLabel: UILabel!
     var scoreNumber : Int = 0
     var numberOfLives = 3
-    var numberOfRounds : Int = 0 // might need to delete this it's unnessesery
+    var numberOfRounds : Int = 0 //TODO: maybe delete this or make it as a text for the start btn
+    var gameIsOver : Bool = true
     
     
     //MARK:- 3. varibles related for playing the sounds and glow in the game
@@ -77,6 +78,7 @@ class ViewController: UIViewController {
         scoreNumber = 0
         numberOfRounds = 0
         numberOfLives = 3
+        gameIsOver = false
         
         randomNumber = Int(arc4random_uniform(4)+1)
         arrayOfBtnNumbersPlayedByTheComp.append(self.randomNumber)
@@ -95,7 +97,7 @@ class ViewController: UIViewController {
         changeThePlayButtons(isEnabledStatus: false, arrayOfButtons: arrayOfButtons)
         
         arrayOfBtnNumbersPlayedByThePlayer.removeAll()
-        gameTimer = Timer.scheduledTimer(timeInterval: 1.3, target: self, selector: #selector(usingButtonsArray), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 1.1, target: self, selector: #selector(usingButtonsArray), userInfo: nil, repeats: true)
     }
     
     @objc func usingButtonsArray() {
@@ -152,7 +154,8 @@ class ViewController: UIViewController {
                 updateUI()
                 print(scoreNumber)
                 if numberOfLives == 0 {
-                    //gameOver()
+                    gameIsOver = true
+                    gameOver()
                 }
                 break
             }
@@ -161,10 +164,31 @@ class ViewController: UIViewController {
         if arrayOfBtnNumbersPlayedByThePlayer.count == arrayOfBtnNumbersPlayedByTheComp.count {
             randomNumber = Int(arc4random_uniform(4)+1)
             arrayOfBtnNumbersPlayedByTheComp.append(self.randomNumber)
-            startNewRound()
+            if !gameIsOver {
+                print(gameIsOver)
+                startNewRound()
+            }
         }
     }
     
+    
+    //MARK:- 12.Game Over Method
+    func gameOver() {
+        print("GAME OVER!!")
+        
+        let gameOverAlert = UIAlertController(title: "GAME OVER", message: "Your Score Is: \(scoreNumber)", preferredStyle: .alert)
+        
+        let startOver = UIAlertAction(title: "Start Over", style: .default) { (startOver) in
+            self.loadNewGame()
+        }
+        
+        let seeHighScore = UIAlertAction(title: "High Score", style: .default) { (seeHighScore) in
+            print("go to high Score")
+        }
+        gameOverAlert.addAction(startOver)
+        gameOverAlert.addAction(seeHighScore)
+        present(gameOverAlert, animated: true, completion: nil)
+    }
     
     
     //MARK:- 15.playSound method - play the selected sound from the sound array
