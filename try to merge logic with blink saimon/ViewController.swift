@@ -57,34 +57,106 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    
+    //MARK:- 6.changeThePlayButtons(isEnabledStatus) makes the 4 game buttons enable/disable
     func changeThePlayButtons(isEnabledStatus: Bool, arrayOfButtons: [UIButton]){
         for i in 0...arrayOfButtons.count - 1 {
             arrayOfButtons[i].isEnabled = isEnabledStatus
         }
     }
     
-    
+    //MARK:- 7.start button pressed
     @IBAction func startButtonPressed(_ sender: UIButton) {
         startButton.isEnabled = false
         loadNewGame()
     }
     
+    
     func loadNewGame() {
-        print("start over started")
         
         arrayOfBtnNumbersPlayedByTheComp.removeAll()
         scoreNumber = 0
         numberOfRounds = 0
         numberOfLives = 3
+        
+        randomNumber = Int(arc4random_uniform(4)+1)
+        arrayOfBtnNumbersPlayedByTheComp.append(self.randomNumber)
         updateUI()
-        //startNewRound()
+        startNewRound()
     }
     
+    //MARK:- 8.update UI ------> need to check if i should add a text for round number and good bad ansowers on the start button
     func updateUI(){
         scoreLabel.text = "score = \(scoreNumber)"
         livesLabel.text = "Lives = \(numberOfLives)"
     }
 
+    //MARK:- 9.start a new round of buttons played by the computer
+    func startNewRound() {
+        
+        arrayOfBtnNumbersPlayedByThePlayer.removeAll()
+        gameTimer = Timer.scheduledTimer(timeInterval: 1.3, target: self, selector: #selector(usingButtonsArray), userInfo: nil, repeats: true)
+    }
+    
+    @objc func usingButtonsArray() {
+        makeComputerButtonFlash(buttons: arrayOfButtons)
+    }
+    
+    //MARK:- 10.The function that calls for the sound and animation for each button played by the computer i needed to call         this function with another @objc function(usingButtonsArray) cos the selector of the Timer couldent get varibles such as [UIButton] when calling the makeComputerButtonFlash directly
+    func makeComputerButtonFlash(buttons: [UIButton]) {
+        selectedSound = arrayOfSounds[arrayOfBtnNumbersPlayedByTheComp[counterForTheComputerTurn] - 1]
+        
+        if counterForTheComputerTurn == arrayOfBtnNumbersPlayedByTheComp.count - 1{
+            
+            buttons[arrayOfBtnNumbersPlayedByTheComp[counterForTheComputerTurn] - 1].flash()
+            playSound()
+            gameTimer.invalidate()
+            counterForTheComputerTurn = 0
+            changeThePlayButtons(isEnabledStatus: true, arrayOfButtons: arrayOfButtons)
+            //TODO: make a label to notifiy the player it's his turn
+            return
+        }
+        
+        if counterForTheComputerTurn < arrayOfBtnNumbersPlayedByTheComp.count - 1 {
+            
+            buttons[arrayOfBtnNumbersPlayedByTheComp[counterForTheComputerTurn] - 1].flash()
+            playSound()
+            counterForTheComputerTurn += 1
+            print([counterForTheComputerTurn - 1])
+        }
+    }
+    
+    
+    
+    
+    //MARK:- 15.playSound method - play the selected sound from the sound array
+    func playSound(){
+        let soundURL = Bundle.main.url(forResource: selectedSound, withExtension: "wav")
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: soundURL!)
+        } catch {
+            print(error)
+        }
+        soundPlayer.play()
+    }
+}
+
+
+extension UIButton {
+    
+    func flash(){
+        let flash = CABasicAnimation(keyPath: "shadowOpacity")
+        flash.duration = 0.7
+        flash.fromValue = 1
+        flash.toValue = 0
+        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        flash.autoreverses = false
+        flash.repeatCount = 1
+        
+        layer.shadowColor = UIColor.white.cgColor
+        layer.shadowRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        layer.add(flash, forKey: nil)
+    }
 }
 
